@@ -46,13 +46,13 @@ export default function Sidebar() {
                     </Button>
                     <div className="mt-2 mb-3 pl-2 transition-all duration-300">
                         {section.sectionItem.map((subItem,key)=>(
-                            <div style={{height:!openedMenu.includes(subItem.title)?40:40+(35*subItem.subMenu.length)}} key={`${key}`} className={`mb-4 transition-all duration-300 h-fit overflow-hidden `}>
+                            <div style={{height:!(openedMenu === subItem.title)?40:40+(35*subItem.subMenu.length)}} key={`${key}`} className={`mb-4 transition-all duration-300 h-fit overflow-hidden `}>
                                 <Button onClick={()=>{editOpenedmenu(subItem.title)}} variant={"ghost"} className="flex-center w-full justify-start mb-2 pl-3" >
                                     <subItem.titleIcon className="text-2xl"/>
                                     <div className="flex-center grow justify-between">
                                         <span className="font-semibold ml-1">{subItem.title}</span>
                                         <SvgIcons.ChevronSvg 
-                                            className={`scale-150 fill-main transition-all duration-300 ${openedMenu.includes(subItem.title)?"rotate-180":""}`}
+                                            className={`scale-150 fill-main transition-all duration-300 ${(openedMenu === subItem.title)?"rotate-180":""}`}
                                         />
                                     </div>
                                 </Button>

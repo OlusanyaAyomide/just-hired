@@ -1,4 +1,5 @@
 import menuIcons from "@/icons/MenuIcons";
+import { SvgIcons } from "@/icons/SvgIconts";
 import { LucideProps } from "lucide-react";
 
 interface IsideBarContent   {
@@ -94,21 +95,21 @@ export const sideBarContent:IsideBarContent[]=[
                 {text:"View Task",link:"/recruit/task/view"}
             ]
         },
-        {
-            title:"Country",
-            titleIcon:menuIcons.companyBlock,
-            subMenu:[
-                {text:"Add Country",link:"/recruit/coutry/add"},
-                {text:"View Country",link:"/recruit/country/view"}
-            ]
-        },
     ]
     },
     {
         section:"ADMINISTRATION",
         baseUrl:"/administration",
-        sectionIcon:menuIcons.recruitment,
+        sectionIcon:SvgIcons.AdminHead,
         sectionItem:[
+            {
+                title:"Country",
+                titleIcon:menuIcons.companyBlock,
+                subMenu:[
+                    {text:"Add Country",link:"/admin/country/add"},
+                    {text:"View Country",link:"/admin/country/view"}
+                ]
+            },
             {
                 title:"Education",
                 titleIcon:menuIcons.education,

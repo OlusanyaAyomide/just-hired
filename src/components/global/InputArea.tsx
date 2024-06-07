@@ -1,8 +1,7 @@
 import {FieldValues, UseFormRegister, Path} from 'react-hook-form';
 import { cn } from '@/lib/utils';
-import { Input } from '../ui/input';
 import { InputType } from '@/interfaces/authInterface';
-import { SvgIcons } from '@/icons/SvgIconts';
+import { Textarea } from '../ui/text-area';
 
   
   type InputFieldType<T extends FieldValues> = {
@@ -21,8 +20,8 @@ import { SvgIcons } from '@/icons/SvgIconts';
   };
   
   // global input field for validating user inputs
-  export default function InputField<T extends FieldValues>({
-    containerClassName, type = 'text',required, fieldName,title, disabled = false, placeholder, error, register, className,showPasswordToggle,onpaswordToggle
+  export default function InputArea<T extends FieldValues>({
+    containerClassName,required, fieldName,title, disabled = false, placeholder, error, register, className,showPasswordToggle,onpaswordToggle
   }:InputFieldType<T>) {
     const {
       onChange, onBlur, name, ref,
@@ -32,9 +31,11 @@ import { SvgIcons } from '@/icons/SvgIconts';
       <div className={cn('mb-5 w-full relative', containerClassName)}>
         <h3 className="my-1 pl-1 text-shade font-medium">
           <span>{title}</span>
-          {required?<span className='text-red-500 text-lg relative top-1 ml-2'>*</span>:null}  
+          {required?<span className='text-red-500 text-lg ml-2'>*</span>:null}  
         </h3>
-        <Input onChange={onChange} name={name} onBlur={onBlur} ref={ref} type={type} disabled={disabled} placeholder={placeholder} className={cn(`invalid:border-red-500 ${error ? 'border-red-500' : ''}`, className)} />
+        <Textarea onChange={onChange} name={name} onBlur={onBlur} ref={ref} disabled={disabled} placeholder={placeholder} className={cn(`invalid:border-red-500 resize-none w-full h-[150px] overflow-scroll default-scroll ${error ? 'border-red-500' : ''}`, className)}>
+
+        </Textarea>
         {showPasswordToggle
         ? (
           <button
@@ -43,12 +44,8 @@ import { SvgIcons } from '@/icons/SvgIconts';
             onClick={onpaswordToggle}
             className={`rounded-full absolute  right-2 bottom-0 p-2`}
           >
-            <span>
-              {type === 'text' ? <SvgIcons.EyesClosed /> : <SvgIcons.EyesOpened />}
-            </span>
           </button>
         ) : null}
-
         {error ? <span className="text-red-500 text-sm absolute -bottom-5 left-2">{error}</span> : null}
       </div>
     );

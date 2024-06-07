@@ -13,7 +13,7 @@ export default function Layout({children,className}:{children:React.ReactNode,cl
         </div>
         <div className="min-h-[120vh] relative grow" >
             <Header/>
-            <div className={cn("bg-[#F5F6FA] padding-x",className)}>
+            <div className={cn("bg-[#F5F6FA] pb-8 min-h-screen padding-x",className)}>
                 {children}
             </div>
         </div>
