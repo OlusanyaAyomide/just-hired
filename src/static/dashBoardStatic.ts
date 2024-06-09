@@ -533,3 +533,74 @@ export const dashboardSubCards =[
         ]
     },
 ]
+
+export const paymentOverview:IdashboardOverview[]=[
+    {
+        title:"upload billing",
+        number:70000000,
+        isPositive:false,
+        percentage:42,
+        day:"This Month"
+    },
+    {
+        title:"Billing Point",
+        number:2800,
+        isPositive:true,
+        percentage:42,
+        day:"This Month"
+    },
+    {
+        title:"Claw back amount",
+        number:25000,
+        isPositive:false,
+        percentage:42,
+        day:"This Month"
+    }
+]
+
+export const paymentOverview2:IdashboardOverview[]=[
+    {
+        title:"Clawback Point",
+        number:1,
+        isPositive:true,
+        percentage:64,
+        day:"This Month"
+    },
+    {
+        title:"Team Leader Incentive",
+        number:400000,
+        isPositive:true,
+        percentage:42,
+        day:"This Month"
+    },
+    {
+        title:"Team Leader Salary",
+        number:400000,
+        isPositive:false,
+        percentage:42,
+        day:"This Month"
+    }
+]
+
+
+
+export const dashBoardTopPerformer =[
+    {
+        name:"Ajao Adekunle",
+        flag:"/flag/nigeria.png",
+        avatar:"/avatar/user4.png",
+        country:"Nigeria"
+    },
+    {
+        name:"Akang Helen",
+        flag:"/flag/nigeria.png",
+        avatar:"/avatar/user5.png",
+        country:"Nigeria"
+    },
+    {
+        name:"Okafor Ifeoma",
+        flag:"/flag/kenya.png",
+        avatar:"/avatar/user6.png",
+        country:"kenya"
+    },
+]

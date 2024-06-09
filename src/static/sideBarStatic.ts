@@ -99,7 +99,7 @@ export const sideBarContent:IsideBarContent[]=[
     },
     {
         section:"ADMINISTRATION",
-        baseUrl:"/administration",
+        baseUrl:"/admin",
         sectionIcon:SvgIcons.AdminHead,
         sectionItem:[
             {
