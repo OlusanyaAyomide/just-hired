@@ -3,7 +3,14 @@ import Header from "./Header";
 import ProfileSection from "./ProfileSection";
 import Sidebar from "./Sidebar";
 
-export default function Layout({children,className}:{children:React.ReactNode,className?:string}) {
+
+interface ILayout{
+    children:React.ReactNode
+    className?:string
+    title:string
+    content:string
+}
+export default function Layout({children,className,title,content}:ILayout) {
   return (
     <div className="min-h-screen flex max-w-[1600px] mx-auto">
         <div className="min-h-full relative shrink-0 hidden lg:block lg:w-[270px]">
@@ -12,8 +19,8 @@ export default function Layout({children,className}:{children:React.ReactNode,cl
             </div>
         </div>
         <div className="min-h-[120vh] relative grow" >
-            <Header/>
-            <div className={cn("bg-[#F5F6FA] pb-8 min-h-screen padding-x",className)}>
+            <Header title={title} content={content}/>
+            <div className={cn("bg-[#F5F6FA] pb-8 pt-2 min-h-screen padding-x",className)}>
                 {children}
             </div>
         </div>

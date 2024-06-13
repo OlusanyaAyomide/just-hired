@@ -40,7 +40,7 @@ export default function CoutnryAdd() {
     }   
 
     return (
-    <Layout>
+    <Layout title='Country' content='Add Countries'>
         <div className="mt-3 py-2 border-b">
             <span className='font-bold text-lg'>Add Country</span>
         </div>   

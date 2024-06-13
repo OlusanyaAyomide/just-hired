@@ -30,7 +30,7 @@ export default function Sidebar() {
                     </div>
                 </Link>
                 <Link className="flex-center hover:underline underline-offset-2 decoration-main w-full mb-4 block pl-3" to={"/dashboard/payment"}>
-                    <div className="pl-6 flex-center">
+                    <div className="pl-2 flex-center">
                         {pathname === "/dashboard/payment" ?<SvgIcons.rightArrow className="ml-4 mr-2"/>:null}
                         <menuIcons.paymentmethod className="mr-1"/>
                         <span>Payment Dashboard</span>

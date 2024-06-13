@@ -1,5 +1,5 @@
 import { Button } from '../ui/button'
-import { DateRangePicker } from 'rsuite';
+import  RangePicker  from '../../components/global/RangePicker';
 
 export default function DashboardFilter() {
 
@@ -27,13 +27,12 @@ export default function DashboardFilter() {
             </div>
         </div>
         <div className="w-fit  max-md:mt-4 flex-center">
-            <div className="bg-gray-100 w-fit h-10 flex justify-center">
-                <div className="max-w-[100vw]  overflow-hidden default:-scroll">
-                    <DateRangePicker
-                    onChange={()=>{
+            <div className="bg-gray-100 w-fit h-10 mb-2 flex-center justify-center">
+                <RangePicker
+                   onSelect={({startDate,endDate})=>{
+                        console.log(startDate,endDate)
                     }}
                 />
-                </div>
             </div>
         </div>
     </div>

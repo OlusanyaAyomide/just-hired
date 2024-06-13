@@ -1,13 +1,12 @@
 import DashboardFilter from "@/components/dashboard/DashboardFilter";
 import Layout from "@/components/global/layout/Layout";
 import { dashboardSubCards, dashboarditle } from "@/static/dashBoardStatic";
-import "./style.css"
 import DashboardCards from "@/components/dashboard/DashboardCards";
 import DashboardCompanies from "@/components/dashboard/DashboardCompanies";
 
 export default function DashBoard() {
   return (
-    <Layout className="px-0">
+    <Layout className="px-0" title="Dashboard" content="MainDashboard">
       <DashboardFilter/>
       <div className="mt-3">
         {dashboarditle.map((item,index)=>(

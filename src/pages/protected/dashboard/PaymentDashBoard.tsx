@@ -1,6 +1,5 @@
 import Layout from '@/components/global/layout/Layout';
 
-import "./style.css"
 import PaymentFilter from '@/components/dashboard/payment/PaymentFilter';
 import DashboardCards from '@/components/dashboard/DashboardCards';
 import { dashBoardTopPerformer, dashboardSubCards, paymentOverview, paymentOverview2 } from '@/static/dashBoardStatic';
@@ -10,7 +9,7 @@ import DashboardCompanies from '@/components/dashboard/DashboardCompanies';
 
 export default function PaymentDashBoard() {
   return (
-   <Layout>
+   <Layout title='Dashboard' content='Payment Dashboard'>
        <PaymentFilter/> 
        <div className="mt-3 flex flex-wrap mb-2">
             {paymentOverview.map((item,key)=>(

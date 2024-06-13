@@ -6,7 +6,7 @@ import { AlignRight, Menu } from "lucide-react";
 import Sidebar from "./Sidebar";
 import ProfileSection from "./ProfileSection";
 
-export default function Header() {
+export default function Header({title,content}:{title:string,content:string}) {
   return (
     <header className="sticky bg-white flex-center justify-between padding-x py-1 z-40 w-full top-0 left-0 shadow-sm">
         <div className="flex-center">
@@ -19,8 +19,8 @@ export default function Header() {
               </SheetContent>
             </Sheet>
             <h3 className="flex-col flex">
-              <span className="text-lg inline-block ">Main Dashboard</span>
-              <span className="text-shade opacity-70">Hello Badmus, Welcome to Pronext</span>
+              <span className="text-lg inline-block ">{title}</span>
+              <span className="text-shade opacity-70">{content}</span>
             </h3>
         </div>
         <div className="flex-center max-md:hidden grow  justify-end">
