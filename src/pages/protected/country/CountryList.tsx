@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { SvgIcons } from '@/icons/SvgIconts'
 import { countryTempList } from '@/static/coutry-static'
+import { Link } from 'react-router-dom'
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogTrigger } from '@/components/ui/alert-dialog'
 
 interface ICountryItem{
     title:string
@@ -23,9 +25,6 @@ const CountryItem = ({title,content,flagUrl}:ICountryItem)=>(
 
 export default function CountryList() {
   const [activeCountry,setActiveCountry] = useState("")
-
-
-
 
   return (
     <Layout title='Country' content={"Country List"}>
@@ -71,8 +70,29 @@ export default function CountryList() {
                   <h3 className="mt-2 font-light">Additional Note</h3>
                   <p className="my-0.5">{item.additionalNote}</p>
                 <div className="mt-5 flex-center justify-between w-full max-w-[200px]">
-                  <Button className='shadow-sm px-12 mr-4 rounded-lg'>Edit</Button>
-                  <Button variant={"outline"} className='shadow-sm px-10 rounded-lg'>Delete</Button>
+                  <Link to="/admin/country/edit/123">
+                      <Button className='shadow-sm px-12 mr-4 rounded-lg'>Edit</Button>
+                  </Link>
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button variant={"outline"} className='shadow-sm px-10 rounded-lg'>Delete</Button>
+                    </AlertDialogTrigger>   
+                    <AlertDialogContent className='border border-main py-10 px-3 sm:px-8'>
+                      <p className="text-lg font-semibold">
+                          The details will be permanently deleted from the database.
+                          <br/>
+                          Are you sure you want to delete? 
+                      </p>
+                      <div className="flex mt-8 max-sm:justify-between sm:justify-end ">
+                        <AlertDialogCancel asChild className='overflow-hidden'>
+                          <Button className='px-12 sm:mr-6 bg-main hover:bg-main hover:text-white hover:brightness-110 rounded-3xl'>No</Button>
+                        </AlertDialogCancel>
+                        <AlertDialogAction asChild>
+                          <Button className='px-12 rounded-3xl hover:bg-accent text-main bg-white border' variant={"outline"}>Yes</Button>
+                        </AlertDialogAction>
+                      </div>
+                    </AlertDialogContent>
+                  </AlertDialog>
                 </div>
             </div>)
         })}

@@ -9,6 +9,7 @@ import RecruitmentAdd from './pages/protected/recruitment/RecruitmentAdd';
 import CoutnryAdd from './pages/protected/country/CoutnryAdd';
 import PaymentDashBoard from './pages/protected/dashboard/PaymentDashBoard';
 import CountryList from './pages/protected/country/CountryList';
+import CountryEdit from './pages/protected/country/CountryEdit';
 
 
 export function App() {
@@ -22,7 +23,8 @@ export function App() {
 
       <Route path='/admin/country/add' element={<CoutnryAdd/>}/>
       <Route path='/admin/country/views' element={<CountryList/>}/>
-
+      <Route path='/admin/country/edits/:id' element={<CountryEdit/>}/>
+      
       <Route path='/recruit/company/view' element={<Recruitment/>}/>
       <Route path='/recruit/company/add' element={<RecruitmentAdd/>}/>
       <Route path='*' element={<div className='text-shade text-2xl pt-20'>Not Found</div>}/>
