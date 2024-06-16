@@ -58,7 +58,7 @@ export default function CountryForm({defaultValues}:{defaultValues?:IAddCountryF
             title='Additional Notes'
             register={register}
             fieldName="additionalNote"
-            placeholder='Enter Continent of the countey'
+            placeholder='Enter Continent of the country'
             error={errors.continent?.message}
         />
     </div>

@@ -1,9 +1,7 @@
 import CountryForm from '@/components/country/CountryForm';
 import Layout from '@/components/global/layout/Layout'
 
-
-
-export default function CoutnryAdd() {
+export default function AddCountry() {
 
     return (
     <Layout title='Country' content='Add Countries'>

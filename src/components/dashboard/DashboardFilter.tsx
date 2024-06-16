@@ -26,7 +26,7 @@ export default function DashboardFilter() {
                 <span className='text-main'>Overall</span>
             </div>
         </div>
-        <div className="w-fit  max-md:mt-4 flex-center">
+        <div className="md:w-full  max-md:mt-4 flex-center">
             <div className="bg-gray-100 w-fit h-10 mb-2 flex-center justify-center">
                 <RangePicker
                    onSelect={({startDate,endDate})=>{

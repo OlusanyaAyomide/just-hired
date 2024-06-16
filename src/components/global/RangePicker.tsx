@@ -9,7 +9,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { DateRangePicker } from 'rsuite';
 import { formatDate } from "@/static/date-services"
+import 'rsuite/DateRangePicker/styles/index.css';
 
 interface IDatePicker{
     onSelect:({startDate,endDate}:{startDate:Date | null,endDate:Date | null})=>void
@@ -20,7 +22,8 @@ export default function RangePicker({onSelect}:IDatePicker) {
   const [endDate,setEndDate]  = React.useState<Date | null>(null)
 
   return (
-    <div className="flex-center">
+    <>
+      <div className="flex-center md:hidden">
         <Popover>
           <PopoverTrigger asChild>
             <Button
@@ -73,6 +76,12 @@ export default function RangePicker({onSelect}:IDatePicker) {
           </PopoverContent>
         </Popover>
     </div>
-  
+    <div className="max-md:hidden block">
+      <DateRangePicker
+        placeholder="Select Start Date  :  Select End Date"
+        className="w-[280px] max-md:hidden"
+      />
+    </div>
+    </>
   )
 }

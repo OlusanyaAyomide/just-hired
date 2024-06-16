@@ -18,11 +18,12 @@ import { SvgIcons } from '@/icons/SvgIconts';
     showPasswordToggle?:boolean
     onpaswordToggle?:()=>void
     required?:boolean
+    extraLabel?:string
   };
   
   // global input field for validating user inputs
   export default function InputField<T extends FieldValues>({
-    containerClassName, type = 'text',required, fieldName,title, disabled = false, placeholder, error, register, className,showPasswordToggle,onpaswordToggle
+    containerClassName, type = 'text',required,extraLabel,fieldName,title, disabled = false, placeholder, error, register, className,showPasswordToggle,onpaswordToggle
   }:InputFieldType<T>) {
     const {
       onChange, onBlur, name, ref,
@@ -31,8 +32,11 @@ import { SvgIcons } from '@/icons/SvgIconts';
     return (
       <div className={cn('mb-5 w-full relative', containerClassName)}>
         <h3 className="my-1 pl-1 text-shade font-medium">
-          <span>{title}</span>
-          {required?<span className='text-red-500 text-lg relative top-1 ml-2'>*</span>:null}  
+          <h3>
+            <span>{title}</span>
+            {required?<span className='text-red-500 text-lg relative top-1 ml-1'>*</span>:null}  
+            {extraLabel?<span className="text-[13px] text-[#8A8686]/70">{extraLabel}</span>:null}
+          </h3>
         </h3>
         <Input onChange={onChange} name={name} onBlur={onBlur} ref={ref} type={type} disabled={disabled} placeholder={placeholder} className={cn(`invalid:border-red-500 ${error ? 'border-red-500' : ''}`, className)} />
         {showPasswordToggle
