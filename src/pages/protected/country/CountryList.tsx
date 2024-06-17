@@ -10,7 +10,15 @@ import DropDownItem from '@/components/global/DropDownItem'
 
 
 export default function CountryList() {
-  const [activeCountry,setActiveCountry] = useState("")
+  const [activeCountry,setActiveCountry] = useState<string[]>([])
+
+  const handleClick=(countryName:string)=>{
+    if(activeCountry.includes(countryName)){
+      const filteredList = activeCountry.filter((item)=>item !== countryName)
+      setActiveCountry(filteredList)
+    }
+    else{setActiveCountry((item)=>[...item,countryName])}
+  }
 
   return (
     <Layout title='Country' content={"Country List"}>
@@ -25,19 +33,17 @@ export default function CountryList() {
         <div className="pt-4">
           <h3 className="font-semibold text-base pl-2">Country Listed</h3>
           {countryTempList.map((item,key)=>{
-            const isActive = item.countryName === activeCountry
+            const isActive = activeCountry.includes(item.countryName)
             return(
               <div  key={key} className={`pb-3 transition-all duration-300 overflow-hidden border shdow-md border-main mb-4 rounded-2xl px-2 sm:px-3 
-                ${isActive?"max-h-96 overflow-scroll default-scroll":"max-h-10"}`}>
+                ${isActive?"max-h-[580px] overflow-scroll default-scroll":"max-h-10"}`}>
                 <div className="flex-center justify-between">
                   <div className='flex-center'>
                     <img className='h-4 w-[18px] shrink-0 mr-2' src={item.flag} alt={item.flag} />
                     <span>{item.countryName}</span>
                   </div> 
                   <Button 
-                  onClick={()=>{
-                    setActiveCountry((prev)=>prev === item.countryName?"":item.countryName)}
-                  }
+                  onClick={()=>{handleClick(item.countryName)}}
                   className={`transition-all hover:bg-transparent group duration-200 ${isActive?"-rotate-[90deg]":""}`} variant={"ghost"} size={"icon"}>
                     <SvgIcons.BlueDropDown
                     className='group-hover:scale-[130%] transition-all duration-300'

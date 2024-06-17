@@ -10,7 +10,15 @@ import DropDownItem from '@/components/global/DropDownItem'
 
 
 export default function EducationList() {
-  const [activeCountry,setActiveCountry] = useState("")
+  const [activeCountry,setActiveCountry] = useState<string[]>([])
+
+  const handleClick=(countryName:string)=>{
+    if(activeCountry.includes(countryName)){
+      const filteredList = activeCountry.filter((item)=>item !== countryName)
+      setActiveCountry(filteredList)
+    }
+    else{setActiveCountry((item)=>[...item,countryName])}
+  }
 
   return (
     <Layout title='Country' content="Hello Hellen , Welcome to pronext">
@@ -25,16 +33,14 @@ export default function EducationList() {
         <div className="pt-4">
           <h3 className="font-semibold text-base pl-2">Education Listed</h3>
           {educationTempList.map((item,key)=>{
-            const isActive = item.educationLevel === activeCountry
+            const isActive = activeCountry.includes(item.educationLevel)
             return(
               <div  key={key} className={`pb-3 transition-all duration-300 overflow-hidden border shdow-md border-main mb-4 rounded-2xl px-2 sm:px-3 
                 ${isActive?"max-h-96 overflow-scroll default-scroll":"max-h-10"}`}>
                 <div className="flex-center justify-between">
                     <span>{item.educationLevel}</span>
                   <Button 
-                  onClick={()=>{
-                    setActiveCountry((prev)=>prev === item.educationLevel?"":item.educationLevel)}
-                  }
+                  onClick={()=>{handleClick(item.educationLevel)}}
                   className={`transition-all hover:bg-transparent group duration-200 ${isActive?"-rotate-[90deg]":""}`} variant={"ghost"} size={"icon"}>
                     <SvgIcons.BlueDropDown
                     className='group-hover:scale-[130%] transition-all duration-300'

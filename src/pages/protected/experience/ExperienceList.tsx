@@ -10,7 +10,15 @@ import { experienceTempList } from '@/static/experience-static'
 
 
 export default function ExperienceList() {
-  const [activeCountry,setActiveCountry] = useState("")
+  const [activeCountry,setActiveCountry] = useState<string[]>([])
+
+  const handleClick=(countryName:string)=>{
+    if(activeCountry.includes(countryName)){
+      const filteredList = activeCountry.filter((item)=>item !== countryName)
+      setActiveCountry(filteredList)
+    }
+    else{setActiveCountry((item)=>[...item,countryName])}
+  }
 
   return (
     <Layout title='Experience' content="Hello Helen, Welcome to pronext">
@@ -25,16 +33,14 @@ export default function ExperienceList() {
         <div className="pt-4">
           <h3 className="font-semibold text-base pl-2">Experience Listed</h3>
           {experienceTempList.map((item,key)=>{
-            const isActive = item.experienceLevel === activeCountry
+            const isActive = activeCountry.includes(item.experienceLevel)
             return(
               <div  key={key} className={`pb-3 transition-all duration-300 overflow-hidden border shdow-md border-main mb-4 rounded-2xl px-2 sm:px-3 
                 ${isActive?"max-h-96 overflow-scroll default-scroll":"max-h-10"}`}>
                 <div className="flex-center justify-between">
                     <span>{item.experienceLevel}</span>
                   <Button 
-                  onClick={()=>{
-                    setActiveCountry((prev)=>prev === item.experienceLevel?"":item.experienceLevel)}
-                  }
+                  onClick={()=>{handleClick(item.experienceLevel)}}
                   className={`transition-all hover:bg-transparent group duration-200 ${isActive?"-rotate-[90deg]":""}`} variant={"ghost"} size={"icon"}>
                     <SvgIcons.BlueDropDown
                     className='group-hover:scale-[130%] transition-all duration-300'
