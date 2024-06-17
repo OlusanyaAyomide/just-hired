@@ -37,7 +37,7 @@ export default function EducationForm({defaultValues}:{defaultValues?:IAddEducat
         </div>
         <div className="w-full mt-8 flex justify-end">
             <Button size={"lg"} className='flex px-10'>
-                <span>Save Experience</span>
+                <span>{defaultValues?"Edit":"Save"} Experience</span>
             </Button>
         </div>
     </form>

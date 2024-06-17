@@ -89,7 +89,7 @@ export default function CountryForm({defaultValues}:{defaultValues?:IAddCountryF
         </div>
         <div className="w-full mt-8">
             <Button size={"lg"} className='flex px-10 2xl:ml-auto'>
-                <span>Save Country</span>
+                <span>{defaultValues?"Edit":"Save"} Country</span>
             </Button>
         </div>
 
