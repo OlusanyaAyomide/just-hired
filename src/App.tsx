@@ -11,9 +11,9 @@ const AddCountry = lazy(()=> import('./pages/protected/country/AddCountry'));;
 const PaymentDashBoard = lazy(()=> import('./pages/protected/dashboard/PaymentDashBoard'));
 const CountryList = lazy(()=> import('./pages/protected/country/CountryList'));
 const CountryEdit = lazy(()=> import('./pages/protected/country/CountryEdit'));
-// const AddEducation = lazy(()=> import('./pages/protected/education/AddEducation'));
-// const EditEducatiion = lazy(()=> import('./pages/protected/education/EditEducation'));
-// const EducationList = lazy(()=> import('./pages/protected/education/EduactionList'));
+const AddEducation = lazy(()=> import('./pages/protected/education/AddEducation'));
+const EditEducatiion = lazy(()=> import('./pages/protected/education/EditEducation'));
+const EducationList = lazy(()=> import('./pages/protected/education/EduactionList'));
 // const AddExperience = lazy(()=> import( './pages/protected/experience/AddExperience'));
 // const ExperienceList = lazy(()=> import( './pages/protected/experience/ExperienceList'));
 // const EditExperience = lazy(()=> import( './pages/protected/experience/EditExperience'));
@@ -33,9 +33,9 @@ export function App() {
         <Route path='/admin/country/view' element={<CountryList/>}/>
         <Route path='/admin/country/edit/:id' element={<CountryEdit/>}/>
         {/* NextUpdate */}
-        {/* <Route path='/admin/education/add' element={<AddEducation/>}/>
+        <Route path='/admin/education/add' element={<AddEducation/>}/>
         <Route path='/admin/education/view' element={<EducationList/>}/>
-        <Route path='/admin/education/edit/123' element={<EditEducatiion/>}/> */}
+        <Route path='/admin/education/edit/123' element={<EditEducatiion/>}/>
         {/* Next Update */}
         {/* <Route path='/admin/experience/add' element={<AddExperience/>}/>
         <Route path='/admin/experience/view' element={<ExperienceList/>}/>
