@@ -11,3 +11,18 @@ export function matchPath({pathname, pattern}:{pathname:string,pattern:string}) 
   // return regex.test(pathname);
   return pathname.startsWith(pattern)
 }
+
+export const generateYearsArray=() =>{
+  const currentYear = new Date().getFullYear();
+  const startYear = 1956;
+  return Array.from({ length: currentYear - startYear + 1 }, (_, index) => currentYear - index);
+}
+
+export function formatDate(date: Date): string {
+  const options: Intl.DateTimeFormatOptions = { 
+      month: 'long', 
+      day: 'numeric', 
+      year: 'numeric' 
+  };
+  return date.toLocaleDateString('en-US', options);
+}
