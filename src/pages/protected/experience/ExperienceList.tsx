@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import Layout from '@/components/global/layout/Layout'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { SvgIcons } from '@/icons/SvgIconts'
 import { Link } from 'react-router-dom'
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogTrigger } from '@/components/ui/alert-dialog'
+import { AlertDialog, AlertDialogAction, AlertDialogCancel,   
+      AlertDialogContent, AlertDialogTrigger
+ } from '@/components/ui/alert-dialog'
 import DropDownItem from '@/components/global/DropDownItem'
 import { experienceTempList } from '@/static/experience-static'
+import PageInput from '@/components/global/PageInput'
 
 
 export default function ExperienceList() {
@@ -25,17 +27,14 @@ export default function ExperienceList() {
       <div className="card">
         <div className='flex justify-between max-sm:flex-col mt-3 pb-2 border-b'>
           <span className='font-bold text-lg'>View Experience</span>
-          <div className="flex-center grow rounded-md bg-gray-100 max-sm:mt-3 sm:max-w-[380px]">
-            <SvgIcons.BlueSearch className="scale-[75%] shrink-0 relative left-2"/>
-            <Input placeholder='Search' className=" rounded-r-none border-none focus-visible:border-none focus:border-none w-full bg-transparent md:max-w-[400px]"/>
-          </div>
+          <PageInput/>
         </div>
         <div className="pt-4">
           <h3 className="font-semibold text-base pl-2">Experience Listed</h3>
           {experienceTempList.map((item,key)=>{
             const isActive = activeCountry.includes(item.experienceLevel)
             return(
-              <div  key={key} className={`pb-3 transition-all duration-300 overflow-hidden border shdow-md border-main mb-4 rounded-2xl px-2 sm:px-3 
+              <div  key={key} className={`pb-3 transition-all duration-300 overflow-hidden border shadow-md border-main mb-4 rounded-2xl px-2 sm:px-3 
                 ${isActive?"max-h-96 overflow-scroll default-scroll":"max-h-10"}`}>
                 <div className="flex-center justify-between">
                     <span>{item.experienceLevel}</span>

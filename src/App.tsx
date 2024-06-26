@@ -1,13 +1,18 @@
 import {BrowserRouter,Route,Routes,
 } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
+
 import FullLoader from './components/global/FullLoader';
+import GroupList from './pages/protected/hr/group/GroupList';
+
+
 const LogIn = lazy(()=> import('./pages/auth/LogIn'));
 const Dashboard = lazy(()=> import('./pages/protected/dashboard/DashBoard'));
 const ForgotPassword = lazy(()=> import('./pages/auth/ForgotPassword'));
 const NewPassword = lazy(()=> import('./pages/auth/NewPassword'));
-// const Recruitment = lazy(()=> import('./pages/protected/recruitment/Recruitment'));
-// const RecruitmentAdd = lazy(()=> import('./pages/protected/recruitment/RecruitmentAdd'));
+// const HrList = lazy(()=> import('./pages/protected/hr/user/HrList'));
+const HrAdd = lazy(()=> import('./pages/protected/hr/user/HrAdd'));
+// const HrEdit = lazy(()=>import('./pages/protected/hr/user/HrEdit'))
 const AddCountry = lazy(()=> import('./pages/protected/country/AddCountry'));
 const PaymentDashBoard = lazy(()=> import('./pages/protected/dashboard/PaymentDashBoard'));
 const CountryList = lazy(()=> import('./pages/protected/country/CountryList'));
@@ -18,6 +23,7 @@ const EducationList = lazy(()=> import('./pages/protected/education/EduactionLis
 const AddExperience = lazy(()=> import( './pages/protected/experience/AddExperience'));
 const ExperienceList = lazy(()=> import( './pages/protected/experience/ExperienceList'));
 const EditExperience = lazy(()=> import( './pages/protected/experience/EditExperience'));
+const AddGroup = lazy(()=>import("./pages/protected/hr/group/AddGroup"))
 
 
 export function App() {
@@ -43,9 +49,13 @@ export function App() {
         <Route path='/admin/experience/edit/123' element={<EditExperience/>}/>
         
         {/* NextUpdate */}
-        {/* <Route path='/admin/experience/view' element={<Recruitment/>}/>
-        <Route path='/admin/experience/add' element={<RecruitmentAdd/>}/> */}
+        {/* <Route path='/admin/hr/view' element={<HrList/>}/> */}
+        <Route path='/admin/hr/add' element={<HrAdd/>}/>
+        {/* <Route path='/admin/hr/edit/123' element={<HrEdit/>}/> */}
         {/* Next Update */}
+
+        <Route path='/admin/hr/group/create' element={<AddGroup/>} />
+        <Route path='/admin/hr/group/view' element={<GroupList/>} />
         <Route path='*' element={<div className='text-shade text-2xl pt-20'>Not Found</div>}/>
       </Routes>
     </Suspense>

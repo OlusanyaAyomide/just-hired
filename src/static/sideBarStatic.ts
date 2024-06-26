@@ -132,8 +132,8 @@ export const sideBarContent:IsideBarContent[]=[
                 subMenu:[
                     {text:"Add User",link:"/admin/hr/add"},
                     {text:"View User",link:"/admin/hr/view"},
-                    {text:"Create Group",link:"/admin/hr/create"},
-                    {text:"View Group",link:"/admin/hr/view"},
+                    {text:"Create Group",link:"/admin/hr/group/create"},
+                    {text:"View Group",link:"/admin/hr/group/view"},
                     {text:"Create Team Leader",link:"/admin/hr/create"},
                     {text:"View Team Leader",link:"/admin/hr/team"},
                 ]

@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom'
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogTrigger } from '@/components/ui/alert-dialog'
 import DropDownItem from '@/components/global/DropDownItem'
 
-
 export default function CountryList() {
   const [activeCountry,setActiveCountry] = useState<string[]>([])
 
@@ -35,7 +34,7 @@ export default function CountryList() {
           {countryTempList.map((item,key)=>{
             const isActive = activeCountry.includes(item.countryName)
             return(
-              <div  key={key} className={`pb-3 transition-all duration-300 overflow-hidden border shdow-md border-main mb-4 rounded-2xl px-2 sm:px-3 
+              <div  key={key} className={`pb-3 transition-all duration-300 overflow-hidden border shadow-md border-main mb-4 rounded-2xl px-2 sm:px-3 
                 ${isActive?"max-h-[580px] overflow-scroll default-scroll":"max-h-10"}`}>
                 <div className="flex-center justify-between">
                   <div className='flex-center'>

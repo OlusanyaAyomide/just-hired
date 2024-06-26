@@ -35,7 +35,7 @@ export default function EducationList() {
           {educationTempList.map((item,key)=>{
             const isActive = activeCountry.includes(item.educationLevel)
             return(
-              <div  key={key} className={`pb-3 transition-all duration-300 overflow-hidden border shdow-md border-main mb-4 rounded-2xl px-2 sm:px-3 
+              <div  key={key} className={`pb-3 transition-all duration-300 overflow-hidden border shadow-md border-main mb-4 rounded-2xl px-2 sm:px-3 
                 ${isActive?"max-h-96 overflow-scroll default-scroll":"max-h-10"}`}>
                 <div className="flex-center justify-between">
                     <span>{item.educationLevel}</span>

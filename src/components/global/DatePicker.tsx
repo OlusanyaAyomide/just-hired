@@ -35,7 +35,7 @@ export default function DateOfBirthPicker(
             {extraLabel?<span className="text-[13px] text-[#8A8686]/70">{extraLabel}</span>:null}
         </h3>
         <Popover >
-            <PopoverTrigger disabled={disabled} className='bg-offwhite w-full flex justify-between disabled:opacity-50 px-2 border rounded-md items-center h-10'>
+            <PopoverTrigger disabled={disabled} className={`bg-offwhite w-full flex justify-between disabled:opacity-50 px-2 border rounded-md items-center h-10 ${error && "border-red-500"}`}>
                 <span className={selectedDate?``:"text-[#8A8686]"}>
                     {selectedDate?formatDate(selectedDate):placeholder}
                 </span>

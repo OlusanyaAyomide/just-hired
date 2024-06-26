@@ -29,7 +29,7 @@ export default function SelectField({
             {extraLabel?<span className="text-[13px] text-[#8A8686]/70">{extraLabel}</span>:null}
         </h3>
         <Select value={value} onValueChange={(value)=>onSelect(value)}>
-            <SelectTrigger disabled={disabled}>
+            <SelectTrigger className={`${error && "border-red-500"}`} disabled={disabled}>
                 {value?<span>{value}</span>:<span className='opacity-70'>{placeholder || "Select a value"}</span>}
             </SelectTrigger>
             <SelectContent>
