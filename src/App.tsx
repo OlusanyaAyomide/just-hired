@@ -22,9 +22,9 @@ const EducationList = lazy(()=> import('./pages/protected/education/EduactionLis
 const AddExperience = lazy(()=> import( './pages/protected/experience/AddExperience'));
 const ExperienceList = lazy(()=> import( './pages/protected/experience/ExperienceList'));
 const EditExperience = lazy(()=> import( './pages/protected/experience/EditExperience'));
-const AddGroup = lazy(()=>import("./pages/protected/hr/group/AddGroup"))
-const GroupList = lazy(()=>import('./pages/protected/hr/group/GroupList'))
-const GroupEdit = lazy(()=>import('./pages/protected/hr/group/GroupEdit'))
+// const AddGroup = lazy(()=>import("./pages/protected/hr/group/AddGroup"))
+// const GroupList = lazy(()=>import('./pages/protected/hr/group/GroupList'))
+// const GroupEdit = lazy(()=>import('./pages/protected/hr/group/GroupEdit'))
 
 
 export function App() {
