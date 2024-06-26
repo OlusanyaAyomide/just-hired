@@ -12,6 +12,6 @@ export interface IAddNewuser {
     nationality: string;
     detailAddress: string;
     role: string;
-    teamLeader: string;
+    teamLeader?: string;
     status: string;
 }

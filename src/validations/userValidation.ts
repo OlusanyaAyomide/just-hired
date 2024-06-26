@@ -16,6 +16,6 @@ export const adduserSchema: yup.ObjectSchema<IAddNewuser> = yup.object({
     nationality: yup.string().required("Nationality is required"),
     detailAddress: yup.string().required("Detail Address is required"),
     role: yup.string().oneOf(["SuperAdmin", "Admin", "OfficeAssistant", "TeamLeader", "Recruiter", "FullTime"], "Role must be one of the specified options").required("Role is required"),
-    teamLeader: yup.string().required("Team Leader is required"),
+    teamLeader: yup.string().optional(),
     status: yup.string().oneOf(["Active", "Suspend"], "Status must be either Active or Suspend").required("Status is required"),
 });

@@ -11,8 +11,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 export default function HrForm({defaultValues}:{defaultValues?:IAddNewuser}) {
 
-  const {register,handleSubmit,watch,setValue,formState: { errors }} = useForm<IAddNewuser>(
-    { resolver: yupResolver(adduserSchema),defaultValues},
+  const {register,handleSubmit,watch,setValue,setError,formState: { errors }} = useForm<IAddNewuser>(
+    { resolver: yupResolver(adduserSchema),defaultValues:{...defaultValues,status:"Active"}},
   );
   const [
     dateOfBirth,gender,maritalStatus,role,status,teamLeader
@@ -20,6 +20,11 @@ export default function HrForm({defaultValues}:{defaultValues?:IAddNewuser}) {
     ["dateOfBirth","gender","maritalStatus","role","status","teamLeader"]
   ) 
   const onSubmit: SubmitHandler<IAddNewuser> = (data) => {
+    console.log(data.role)
+    if((!data.teamLeader) && ((data.role !== "SuperAdmin") && (data.role !== "Admin"))){
+      setError("teamLeader",{type:"manual",message:"Team leader is a required field"})
+      return
+    }
     console.log(data)
   };
   return (
@@ -168,7 +173,7 @@ export default function HrForm({defaultValues}:{defaultValues?:IAddNewuser}) {
             onSelect={(value)=>{setValue("teamLeader",value)}}
             labelText='Team Leader'
             error={errors.teamLeader?.message}
-            required
+            disabled={role === "SuperAdmin" || role === "Admin" || !role}
             placeholder='Select Team Leader'
             options={[
               {value:"Ajao",label:"Ajao Adekunle"},
