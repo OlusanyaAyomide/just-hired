@@ -8,6 +8,8 @@ import { IResetpassword } from '@/interfaces/authInterface';
 import { AuthStatic } from '@/static/authStatic';
 import { resetPasswordSchema } from '@/validations/authValidations';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { usePostRequest } from '@/hooks/usePostRequests';
+import Loader from '@/components/global/Loader';
 
 
 export default function ForgotPassword() {
@@ -15,9 +17,11 @@ export default function ForgotPassword() {
     const {register, handleSubmit,formState: { errors }} = useForm<IResetpassword>(
         { resolver: yupResolver(resetPasswordSchema) },
     );
+
+    const {mutate,isPending} = usePostRequest<void,{email:string}>({url:"/admin/forgot/password",showSuccess:"Verification sent to mail"})
     
     const onSubmit: SubmitHandler<IResetpassword> = (data) => {
-        console.log(data)
+        mutate(data)
     };
 
     return (
@@ -39,11 +43,13 @@ export default function ForgotPassword() {
                 error={errors.email?.message}
             />
 
-            <Button className='w-full block mt-8' size="lg">Sign In</Button>
+            <Button disabled={isPending} className='w-full block mt-8' size="lg">
+                {isPending?<Loader/>:<span>Reset password</span>}
+            </Button>
 
             <Link to={"/login"}>
-                <Button size="lg" variant="outline" className='block mt-6 mx-auto px-12'>
-                    Login
+                <Button disabled={isPending} size="lg" variant="outline" className='block mt-6 mx-auto px-12'>
+                    Log in
                 </Button>
             </Link>
         </form>    

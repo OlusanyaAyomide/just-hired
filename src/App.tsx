@@ -3,6 +3,11 @@ import {BrowserRouter,Route,Routes,
 import { lazy, Suspense } from 'react';
 
 import FullLoader from './components/global/FullLoader';
+import ScrollRestore from './components/global/ScrollRestore';
+import QueryProvider from './components/global/QueryProvider';
+import Toaster from './components/ui/sooner';
+import Layout from './components/global/layout/Layout';
+
 
 
 const LogIn = lazy(()=> import('./pages/auth/LogIn'));
@@ -17,47 +22,50 @@ const PaymentDashBoard = lazy(()=> import('./pages/protected/dashboard/PaymentDa
 const CountryList = lazy(()=> import('./pages/protected/country/CountryList'));
 const CountryEdit = lazy(()=> import('./pages/protected/country/CountryEdit'));
 const AddEducation = lazy(()=> import('./pages/protected/education/AddEducation'));
-const EditEducatiion = lazy(()=> import('./pages/protected/education/EditEducation'));
+const EditEducation = lazy(()=> import('./pages/protected/education/EditEducation'));
 const EducationList = lazy(()=> import('./pages/protected/education/EduactionList'));
 const AddExperience = lazy(()=> import( './pages/protected/experience/AddExperience'));
 const ExperienceList = lazy(()=> import( './pages/protected/experience/ExperienceList'));
 const EditExperience = lazy(()=> import( './pages/protected/experience/EditExperience'));
-// const AddGroup = lazy(()=>import("./pages/protected/hr/group/AddGroup"))
-// const GroupList = lazy(()=>import('./pages/protected/hr/group/GroupList'))
-// const GroupEdit = lazy(()=>import('./pages/protected/hr/group/GroupEdit'))
+const AddGroup = lazy(()=>import("./pages/protected/hr/group/AddGroup"))
+const GroupList = lazy(()=>import('./pages/protected/hr/group/GroupList'))
+const GroupEdit = lazy(()=>import('./pages/protected/hr/group/GroupEdit'))
 
 
 export function App() {
   return (
-    <Suspense fallback={<FullLoader isLoading/>}>
-      <Routes>
-        <Route path="/dashboard" element={<Dashboard/>} />
-        <Route path='/dashboard/payment' element ={<PaymentDashBoard/>}/>
-        <Route path="/login" element={<LogIn/>} />
-        <Route path="/forgot-password" element={<ForgotPassword/>} />
-        <Route path='/new-password' element={<NewPassword/>}/>
+    <Suspense fallback={<Layout content='' title=''><FullLoader isLoading/></Layout>}>
+      <QueryProvider>
+        <Routes>
+          <Route path="/dashboard" element={<Dashboard/>} />
+          <Route path='/dashboard/payment' element ={<PaymentDashBoard/>}/>
+          <Route path="/login" element={<LogIn/>} />
+          <Route path="/forgot-password" element={<ForgotPassword/>} />
+          <Route path='/new-password' element={<NewPassword/>}/>
 
-        <Route path='/admin/country/add' element={<AddCountry/>}/>
-        <Route path='/admin/country/view' element={<CountryList/>}/>
-        <Route path='/admin/country/edit/:id' element={<CountryEdit/>}/>
+          <Route path='/admin/country/add' element={<AddCountry/>}/>
+          <Route path='/admin/country/view' element={<CountryList/>}/>
+          <Route path='/admin/country/edit/:id' element={<CountryEdit/>}/>
 
-        <Route path='/admin/education/add' element={<AddEducation/>}/>
-        <Route path='/admin/education/view' element={<EducationList/>}/>
-        <Route path='/admin/education/edit/123' element={<EditEducatiion/>}/>
+          <Route path='/admin/education/add' element={<AddEducation/>}/>
+          <Route path='/admin/education/view' element={<EducationList/>}/>
+          <Route path='/admin/education/edit/123' element={<EditEducation/>}/>
 
-        <Route path='/admin/experience/add' element={<AddExperience/>}/>
-        <Route path='/admin/experience/view' element={<ExperienceList/>}/>
-        <Route path='/admin/experience/edit/123' element={<EditExperience/>}/>
+          <Route path='/admin/experience/add' element={<AddExperience/>}/>
+          <Route path='/admin/experience/view' element={<ExperienceList/>}/>
+          <Route path='/admin/experience/edit/123' element={<EditExperience/>}/>
 
-        <Route path='/admin/hr/view' element={<HrList/>}/>
-        <Route path='/admin/hr/add' element={<HrAdd/>}/>
-        <Route path='/admin/hr/edit/123' element={<HrEdit/>}/>
+          <Route path='/admin/hr/view' element={<HrList/>}/>
+          <Route path='/admin/hr/add' element={<HrAdd/>}/>
+          <Route path='/admin/hr/edit/123' element={<HrEdit/>}/>
 
-        {/* <Route path='/admin/hr/group/create' element={<AddGroup/>} />
-        <Route path='/admin/hr/group/view' element={<GroupList/>} />
-        <Route path='/admin/hr/group/edit/123' element={<GroupEdit/>} /> */}
-        <Route path='*' element={<div className='text-shade text-2xl pt-20'>Not Found</div>}/>
-      </Routes>
+          <Route path='/admin/hr/group/create' element={<AddGroup/>} />
+          <Route path='/admin/hr/group/view' element={<GroupList/>} />
+          <Route path='/admin/hr/group/edit/123' element={<GroupEdit/>} />
+          <Route path='*' element={<div className='text-shade text-2xl pt-20'>Not Found</div>}/>
+        </Routes>
+      </QueryProvider>
+
     </Suspense>
 
   );
@@ -66,7 +74,9 @@ export function App() {
 export  default function WrappedApp() {
   return (
     <BrowserRouter>
+        <ScrollRestore/>
         <App />
+        <Toaster/>
     </BrowserRouter>
   );
 }

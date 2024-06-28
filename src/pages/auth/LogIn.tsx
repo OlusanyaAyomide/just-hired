@@ -1,23 +1,41 @@
 import AuthLayout from '@/components/auth/AuthLayout';
 import InputField from '@/components/global/InputField';
+import Loader from '@/components/global/Loader';
 import { Button } from '@/components/ui/button';
-import { ISignInForm, InputType } from '@/interfaces/authInterface';
+import { usePostRequest } from '@/hooks/usePostRequests';
+import { ISignInForm, IUserLoginRes, InputType } from '@/interfaces/authInterface';
 import { AuthStatic } from '@/static/authStatic';
 import { loginSchema } from '@/validations/authValidations';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-export default function LogIn() {
+import { Link, useNavigate } from 'react-router-dom';
 
+export default function LogIn() {
     const {register, handleSubmit,formState: { errors }} = useForm<ISignInForm>(
         { resolver: yupResolver(loginSchema) },
     );
 
     const [passwordType, setPasswordType] = useState<InputType>('password');
+
+    const [,setCookie] = useCookies(['authCookie'])
+
+    const navigate = useNavigate()
     
+    const {mutate,isPending} = usePostRequest<IUserLoginRes,ISignInForm>({url:"/admin/login",
+        onSuccess:(data:IUserLoginRes)=>{
+            const today = new Date()
+            const token = data.data?.token
+            const tomorrow = new Date(today.setDate(today.getDate() + 1))
+            setCookie("authCookie",token,{
+                expires:tomorrow
+            })
+            navigate("/dashboard")
+        }})
+
     const onSubmit: SubmitHandler<ISignInForm> = (data) => {
-        console.log(data)
+        mutate(data)
     };
 
     const [isVisible,setIsVisible] = useState(false)
@@ -65,7 +83,9 @@ export default function LogIn() {
                 <Link to={"/forgot-password"} className="text-main hover:underline font-medium">Forgot Password</Link>
             </div>
 
-            <Button className='w-full block mt-6' size="lg">Sign In</Button>
+            <Button disabled={isPending} className='w-full block mt-6' size="lg">
+                {isPending?<Loader/>:"Sign In"}
+            </Button>
         </form>    
     </AuthLayout>
   )
