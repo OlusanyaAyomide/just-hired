@@ -26,3 +26,7 @@ export function formatDate(date: Date): string {
   };
   return date.toLocaleDateString('en-US', options);
 }
+
+export function camelCaseToSpaces(str: string): string {
+  return str.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase();
+}

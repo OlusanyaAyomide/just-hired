@@ -6,7 +6,6 @@ import FullLoader from './components/global/FullLoader';
 import ScrollRestore from './components/global/ScrollRestore';
 import QueryProvider from './components/global/QueryProvider';
 import Toaster from './components/ui/sooner';
-import Layout from './components/global/layout/Layout';
 
 
 
@@ -30,11 +29,12 @@ const EditExperience = lazy(()=> import( './pages/protected/experience/EditExper
 const AddGroup = lazy(()=>import("./pages/protected/hr/group/AddGroup"))
 const GroupList = lazy(()=>import('./pages/protected/hr/group/GroupList'))
 const GroupEdit = lazy(()=>import('./pages/protected/hr/group/GroupEdit'))
+// const CreateForm = lazy(()=>import('./pages/form/CreateForm'))
 
 
 export function App() {
   return (
-    <Suspense fallback={<Layout content='' title=''><FullLoader isLoading/></Layout>}>
+    <Suspense fallback={<FullLoader isLoading/>}>
       <QueryProvider>
         <Routes>
           <Route path="/dashboard" element={<Dashboard/>} />
@@ -62,6 +62,9 @@ export function App() {
           <Route path='/admin/hr/group/create' element={<AddGroup/>} />
           <Route path='/admin/hr/group/view' element={<GroupList/>} />
           <Route path='/admin/hr/group/edit/123' element={<GroupEdit/>} />
+{/* 
+          <Route path='/admin/form/create' element={<CreateForm/>}/> */}
+
           <Route path='*' element={<div className='text-shade text-2xl pt-20'>Not Found</div>}/>
         </Routes>
       </QueryProvider>

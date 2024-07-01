@@ -3,30 +3,63 @@ import InputArea from '@/components/global/InputArea';
 import InputField from '@/components/global/InputField';
 import SelectField from '@/components/global/SelectField';
 import { Button } from '@/components/ui/button';
+import { useGetRequest } from '@/hooks/useGetRequests';
+import { usePostRequest } from '@/hooks/usePostRequests';
 import { IAddNewuser } from '@/interfaces/add-userinterface';
+import { IAllAdminRes, IUser } from '@/interfaces/hr-intrerface';
 import { adduserSchema } from '@/validations/userValidation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import Loader from '../global/Loader';
 
 
 export default function HrForm({defaultValues}:{defaultValues?:IAddNewuser}) {
 
-  const {register,handleSubmit,watch,setValue,setError,formState: { errors }} = useForm<IAddNewuser>(
+  const {register,handleSubmit,watch,setValue,setError,reset,formState: { errors }} = useForm<IAddNewuser>(
     { resolver: yupResolver(adduserSchema),defaultValues:{...defaultValues,status:"Active"}},
   );
+
   const [
     dateOfBirth,gender,maritalStatus,role,status,teamLeader
   ] = watch(
     ["dateOfBirth","gender","maritalStatus","role","status","teamLeader"]
   ) 
+
   const onSubmit: SubmitHandler<IAddNewuser> = (data) => {
     console.log(data.role)
     if((!data.teamLeader) && ((data.role !== "SuperAdmin") && (data.role !== "Admin"))){
       setError("teamLeader",{type:"manual",message:"Team leader is a required field"})
       return
     }
-    console.log(data)
+  
+    mutate(
+      {
+        firstname:data.firstName,lastname:data.lastName,middlename:data.middleName,
+        phone:data.phoneNumber,dob:data.dateOfBirth.toISOString(),gender:data.gender,
+      email:data.emailAddress,city:data.city,state:data.state,nationality:data.nationality,
+      address:data.detailAddress,role:data.role,teamleader:data.teamLeader || "",status:data.status,recruiter_active:"true",maritalstatus:data.maritalStatus,
+      password:`${data.firstName}1234`       
+
+    })
   };
+
+  const {data} = useGetRequest<IAllAdminRes>({url:"/admin/retrieve/all/admins",queryKey:["all-admin"]})
+
+  const {mutate,isPending} = usePostRequest<void,IUser>({
+    url:defaultValues?"admin/update/staff":"/admin/signup",
+    showSuccess:"new user has been added",addId:!!defaultValues,onSuccess:()=>{
+    reset()
+  }})
+
+  const  copy =  data && [...data?.data.data]
+  const teamLeaderLabel = copy 
+  ? (() => {
+      const item = copy.find((item) => item._id === teamLeader);
+      return item ? `${item.firstname} ${item.lastname}` : "";
+    })()
+  : "";
+  
+    
   return (
     <form onSubmit={handleSubmit(onSubmit)}  className="mt-3 flex flex-wrap max-w-[900px]">
         <InputField
@@ -169,17 +202,22 @@ export default function HrForm({defaultValues}:{defaultValues?:IAddNewuser}) {
             className='w-full sm:w-6/12 2xl:w-4/12 px-1 sm:px-2'
           />
           <SelectField
-            value={teamLeader}
-            onSelect={(value)=>{setValue("teamLeader",value)}}
+            value={teamLeaderLabel}
+            onSelect={(value)=>{
+                console.log(value,"val-change");
+                if(value){
+                  setValue("teamLeader",value)
+                  } 
+                }}
             labelText='Team Leader'
             error={errors.teamLeader?.message}
-            disabled={role === "SuperAdmin" || role === "Admin" || !role}
+            disabled={(role === "SuperAdmin" || role === "Admin" || !role) || !data}
             placeholder='Select Team Leader'
-            options={[
-              {value:"Ajao",label:"Ajao Adekunle"},
-              {value:"AkangHelen",label:"Akang Helen"},
-              {value:"MaryMary",label:"Mary Mary"},
-            ]}
+            options={data?
+              data.data.data.map((item)=>({
+                value:item._id,label:`${item.firstname || "not set"} ${item.lastname || "not set"}`
+              })):[]
+            }
             className='w-full sm:w-6/12 2xl:w-4/12 px-1 sm:px-2'
           />
         </div>
@@ -197,7 +235,14 @@ export default function HrForm({defaultValues}:{defaultValues?:IAddNewuser}) {
             className='w-full sm:w-6/12 2xl:w-4/12 px-1 sm:px-2'
           />
           <div className="py-5 mt-5 w-full ">
-            <Button className='block ml-auto px-8'>{defaultValues?"Edit":"Create"} user</Button>
+            <Button disabled={isPending}
+             className={`block ml-auto px-10 ${isPending && "px-12"}`}>
+              {!isPending?
+                defaultValues?"Edit":"Create"
+                :<Loader/>
+            }
+              
+             </Button>
           </div>
       </form>
   )

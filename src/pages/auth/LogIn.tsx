@@ -23,7 +23,7 @@ export default function LogIn() {
 
     const navigate = useNavigate()
     
-    const {mutate,isPending} = usePostRequest<IUserLoginRes,ISignInForm>({url:"/admin/login",
+    const {mutate,isPending} = usePostRequest<IUserLoginRes,ISignInForm>({url:"/admin/login",addId:false,
         onSuccess:(data:IUserLoginRes)=>{
             const today = new Date()
             const token = data.data?.token

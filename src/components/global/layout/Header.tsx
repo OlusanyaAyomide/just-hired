@@ -11,10 +11,10 @@ export default function Header({title,content}:{title:string,content:string}) {
     <header className="sticky bg-white flex-center justify-between padding-x py-1 z-40 w-full top-0 left-0 shadow-sm">
         <div className="flex-center">
             <Sheet>
-              <SheetTrigger className="md:hidden mr-2">
+              <SheetTrigger className="lg:hidden mr-2">
                 <Menu className="text-lg text-shade"/>
               </SheetTrigger>
-              <SheetContent side="left" className="md:hidden overflow-scroll default-scroll w-full max-w-[320px]">
+              <SheetContent side="left" className="lg:hidden overflow-scroll default-scroll w-full max-w-[320px]">
                 <Sidebar/>
               </SheetContent>
             </Sheet>

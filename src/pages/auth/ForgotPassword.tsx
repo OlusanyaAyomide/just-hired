@@ -18,7 +18,7 @@ export default function ForgotPassword() {
         { resolver: yupResolver(resetPasswordSchema) },
     );
 
-    const {mutate,isPending} = usePostRequest<void,{email:string}>({url:"/admin/forgot/password",showSuccess:"Verification sent to mail"})
+    const {mutate,isPending} = usePostRequest<void,{email:string}>({url:"/admin/forgot/password",addId:false,showSuccess:"Verification sent to mail"})
     
     const onSubmit: SubmitHandler<IResetpassword> = (data) => {
         mutate(data)

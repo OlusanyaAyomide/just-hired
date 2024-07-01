@@ -20,7 +20,6 @@ export default function SelectField({
     extraLabel,labelText,disabled = false,
     className,required,placeholder
     }:ISelectField) {
-
   return (
     <div className={cn("w-full mb-3 relative",className)}>
         <h3>
@@ -32,7 +31,7 @@ export default function SelectField({
             <SelectTrigger className={`${error && "border-red-500"}`} disabled={disabled}>
                 {value?<span>{value}</span>:<span className='opacity-70'>{placeholder || "Select a value"}</span>}
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className='max-h-[200px] overflow-scroll default-scroll'>
                 {options.map((item,key)=>(
                     <SelectItem key={key} value={item.value}>{item.label}</SelectItem>
                 ))}

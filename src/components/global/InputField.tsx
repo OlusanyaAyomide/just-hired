@@ -32,7 +32,7 @@ import { SvgIcons } from '@/icons/SvgIconts';
     return (
       <div className={cn('mb-5 w-full relative', containerClassName)}>
         <div className={`my-1 pl-1 text-shade font-medium ${required?"":"mb-2"}`}>
-          <h3>
+        <h3>
             <span>{title}</span>
             {required?<span className='text-red-500 text-lg relative top-1 ml-1'>*</span>:null}  
             {extraLabel?<span className="text-[13px] text-[#8A8686]/70">{extraLabel}</span>:null}

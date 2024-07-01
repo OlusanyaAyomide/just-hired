@@ -163,6 +163,7 @@ export const sideBarContent:IsideBarContent[]=[
                 titleIcon:menuIcons.export,
                 subMenu:[
                     {text:"View Candidates",link:"/admin/candidates/view"},
+                    {text:"Create Form",link:"/admin/form/create"},
                 ]
             },
             {
